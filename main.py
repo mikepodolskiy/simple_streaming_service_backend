@@ -29,26 +29,6 @@ def register_extensions(app):
     api.add_namespace(movie_ns)
     api.add_namespace(user_ns)
     api.add_namespace(auth_ns)
-#     create_data(app, db)
-#
-#
-# def create_data(app, db):
-#     with app.app_context():
-#         db.create_all()
-#
-#         u1 = User(email='vasya@skypro.com', password='qwerty', role='admin', name='Vasiliy', surname='Vasiliev',
-#                   favorite_genre=1)
-#         u2 = User(email='oleg@skypro.com', password='qwerty', role='user', name='Oleg', surname='Olegov',
-#                   favorite_genre=2)
-#         u3 = User(email='petr@skypro.com', password='qwerty', role='user', name='Petr', surname='Petrov',
-#                   favorite_genre=3)
-#
-#
-#         with db.session.begin():
-#             db.session.add_all([u1, u2, u3])
-
-
-
 
 
 # creating app using function

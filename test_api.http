@@ -1,44 +1,63 @@
 GET http://127.0.0.1:10001/movies/
 Accept: application/json
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhc3lhQHNreXByby5jb20iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzc5MTU2NDN9.-TYavzDCAucIvNY8Y0wUU4J7Qey56fQQfYrtN3bNGek
 ###
 
-GET http://127.0.0.1:10001/movies/?director_id=12
+GET http://127.0.0.1:10001/movies/?status=new
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhc3lhQHNreXByby5jb20iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzc5MTU2NDN9.-TYavzDCAucIvNY8Y0wUU4J7Qey56fQQfYrtN3bNGek
 
 ###
-
-GET http://127.0.0.1:10001/movies/?genre_id=4
+GET http://127.0.0.1:10001/movies/?status=new&page=2
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhc3lhQHNreXByby5jb20iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzc5MTU2NDN9.-TYavzDCAucIvNY8Y0wUU4J7Qey56fQQfYrtN3bNGek
 
 ###
-
-GET http://127.0.0.1:10001/movies/?year=2010
+GET http://127.0.0.1:10001/movies/?page=2
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhc3lhQHNreXByby5jb20iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzc5MTU2NDN9.-TYavzDCAucIvNY8Y0wUU4J7Qey56fQQfYrtN3bNGek
 
 ###
+
+GET http://127.0.0.1:10001/directors/?page=1
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhc3lhQHNreXByby5jb20iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzc5MTU2NDN9.-TYavzDCAucIvNY8Y0wUU4J7Qey56fQQfYrtN3bNGek
+###
+
 
 GET http://127.0.0.1:10001/directors/
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhc3lhQHNreXByby5jb20iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzc5MTU2NDN9.-TYavzDCAucIvNY8Y0wUU4J7Qey56fQQfYrtN3bNGek
+
 
 ###
 
 GET http://127.0.0.1:10001/directors/1
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhc3lhQHNreXByby5jb20iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzc4NjIxODJ9.ZM6lrU9fPqNHtZm7Y19k9P7J3WuyT9ik_rOyfQEzLwo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhc3lhQHNreXByby5jb20iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzc5MTU2NDN9.-TYavzDCAucIvNY8Y0wUU4J7Qey56fQQfYrtN3bNGek
+
+###
 
 GET http://127.0.0.1:10001/genres/
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhc3lhQHNreXByby5jb20iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzc5MTU2NDN9.-TYavzDCAucIvNY8Y0wUU4J7Qey56fQQfYrtN3bNGek
 
 ###
 
-GET http://127.0.0.1:10001/genres/1
+GET http://127.0.0.1:10001/genres/?page=1
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhc3lhQHNreXByby5jb20iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzc5MTU2NDN9.-TYavzDCAucIvNY8Y0wUU4J7Qey56fQQfYrtN3bNGek
+###
+
+GET http://127.0.0.1:10001/genres/2
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhc3lhQHNreXByby5jb20iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzc5MTU2NDN9.-TYavzDCAucIvNY8Y0wUU4J7Qey56fQQfYrtN3bNGek
 
 ###
 
-GET http://127.0.0.1:10001/movies/21
+GET http://127.0.0.1:10001/movies/20
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhc3lhQHNreXByby5jb20iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzc5MTU2NDN9.-TYavzDCAucIvNY8Y0wUU4J7Qey56fQQfYrtN3bNGek
 
 ###
 

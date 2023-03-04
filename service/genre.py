@@ -1,5 +1,6 @@
 # import required modules
 from dao.genre import GenreDAO
+from constants import genre_page_limit as page_limit
 
 
 # creating class to contain all logics from DAO class
@@ -19,11 +20,33 @@ class GenreService:
         """
         return self.dao.get_one(bid)
 
-    def get_all(self):
+    def show_by_page(self, page, page_lim, list_):
         """
-        applying get_all() method to dao object
+        evaluate consistent of page to show and return it
+        :param page: number of page to be shown
+        :param page_lim: number of elements on one page
+        :param list_: initial list with data
+        :return: list of elements with required filter
         """
-        return self.dao.get_all()
+        if page * page_lim < len(list_):
+            list_to_show = [list_[index] for index in range((page - 1) * page_lim, page * page_lim)]
+
+        else:
+            list_to_show = [list_[index] for index in range((page - 1) * page_lim, len(list_))]
+        return list_to_show
+
+    def get_all(self, filters):
+        """
+        applying get_all() method to dao object if no page in request otherwise apply show_by_page method
+        """
+        page = filters.get("page")
+        if page is not None:
+            page = int(page)
+            genres = self.dao.get_all()
+            genres_to_show = self.show_by_page(page, page_limit, genres)
+        else:
+            genres_to_show = self.dao.get_all()
+        return genres_to_show
 
     def create(self, genre_d):
         """

@@ -1,4 +1,6 @@
 # import required modules
+from sqlalchemy import desc
+
 from dao.model.movie import Movie
 
 
@@ -33,6 +35,13 @@ class MovieDAO:
         #     t = t.filter(Movie.year == filters.get("year"))
         # return t.all()
         return self.session.query(Movie).all()
+
+    def get_all_by_year(self):
+        """
+
+        :return:
+        """
+        return self.session.query(Movie).order_by(desc(Movie.year)).all()
 
     def get_by_director_id(self, val):
         return self.session.query(Movie).filter(Movie.director_id == val).all()

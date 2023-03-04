@@ -24,6 +24,8 @@ class DirectorDAO:
         """
         return self.session.query(Director).all()
 
+
+
     def create(self, director_d):
         """
         creating Director class object using data

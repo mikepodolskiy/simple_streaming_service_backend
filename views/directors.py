@@ -19,7 +19,14 @@ class DirectorsView(Resource):
         using serialization with Schema class object
         :return: directors list
         """
-        rs = director_service.get_all()
+
+        page = request.args.get("page")
+
+        filters = {
+            "page": page,
+        }
+
+        rs = director_service.get_all(filters)
         res = DirectorSchema(many=True).dump(rs)
         return res, 200
 

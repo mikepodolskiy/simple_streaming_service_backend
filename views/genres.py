@@ -19,7 +19,13 @@ class GenresView(Resource):
         using serialization with Schema class object
         :return: genres list
         """
-        rs = genre_service.get_all()
+        page = request.args.get("page")
+
+        filters = {
+            "page": page,
+        }
+
+        rs = genre_service.get_all(filters)
         res = GenreSchema(many=True).dump(rs)
         return res, 200
 
