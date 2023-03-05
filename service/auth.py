@@ -114,3 +114,28 @@ def admin_required(func):
         return func(*args, **kwargs)
 
     return wrapper
+
+
+
+def get_email_from_token():
+
+    if 'Authorization' not in request.headers:
+        abort(401)
+
+    data = request.headers['Authorization']
+    token = data.split('Bearer ')[-1]
+
+    try:
+        jwt.decode(token, secret, algorithms=[algo])
+
+    except Exception as e:
+        print('JWT Decode Exception', e)
+        abort(401)
+
+    user = jwt.decode(token, secret, algorithms=[algo])
+    email = user.get('email')
+
+    if not email:
+        return {'message': 'Token not match'}, 401
+
+    return email

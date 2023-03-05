@@ -42,15 +42,15 @@ class MovieDAO:
         :return:
         """
         return self.session.query(Movie).order_by(desc(Movie.year)).all()
+# do not use in this work
+#     def get_by_director_id(self, val):
+#         return self.session.query(Movie).filter(Movie.director_id == val).all()
 
-    def get_by_director_id(self, val):
-        return self.session.query(Movie).filter(Movie.director_id == val).all()
-
-    def get_by_genre_id(self, val):
-        return self.session.query(Movie).filter(Movie.genre_id == val).all()
-
-    def get_by_year(self, val):
-        return self.session.query(Movie).filter(Movie.year == val).all()
+    # def get_by_genre_id(self, val):
+    #     return self.session.query(Movie).filter(Movie.genre_id == val).all()
+    #
+    # def get_by_year(self, val):
+    #     return self.session.query(Movie).filter(Movie.year == val).all()
 
     def create(self, movie_d):
         """

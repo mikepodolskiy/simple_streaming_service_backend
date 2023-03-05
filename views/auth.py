@@ -73,7 +73,7 @@ class AuthView(Resource):
     def put(self):
         req_json = request.json
         refresh_token = req_json.get('refresh_token', None)
-        if user_service.check_request_integrity([refresh_token]):
+        if check_request_integrity([refresh_token]):
             abort(400)
         try:
             data = jwt.decode(jwt=refresh_token, key=secret, algorithms=[algo])

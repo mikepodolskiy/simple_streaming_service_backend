@@ -1,10 +1,10 @@
 # import required libraries and modules
 
 from flask import request
-from flask_restx import Resource, Namespace
+from flask_restx import Resource, Namespace, abort
 from dao.model.user import UserSchema
 from implemented import user_service
-from service.auth import admin_required
+from service.auth import auth_required, admin_required, get_email_from_token, check_request_integrity, compare_passwords
 
 # creating namespace
 user_ns = Namespace('users')
@@ -13,26 +13,68 @@ user_ns = Namespace('users')
 # creating class based views using namespaces for all required endpoints
 @user_ns.route('/')
 class UsersView(Resource):
-    @admin_required
+    @auth_required
     def get(self):
         """
         getting all users list using method get_all of UserService class object
         using serialization with Schema class object
         :return: users list
         """
-        rs = user_service.get_all()
-        res = UserSchema(many=True).dump(rs)
-        return res, 200
+        email = get_email_from_token()
+        filters = {'email': email}
+        r = user_service.get_one_by_key(filters)
+        sm_d = UserSchema().dump(r)
+        return sm_d, 200
 
-    def post(self):
+    def patch(self):
         """
         getting data from request, transforming data using .json
-        creating new element using create(transformed data) method for MovieService class object
-        :return: info message,response code
+        adding id to transformed data (as it should not contain id)
+        updating required element using method update_partial() of MovieService class object
+
+        :return: response code
         """
-        req_json = request.json
-        user = user_service.create(req_json)
-        return "", 201, {"location": f"/users/{user.id}"}
+        request_data = request.json
+        request_data["email"] = get_email_from_token()
+        user_service.update_partial(request_data)
+
+        return '', 204
+
+
+@user_ns.route('/password')
+class UserPass(Resource):
+    @auth_required
+    def put(self):
+        """
+        changing password - from password_1 to password_2, collected from request body as dict {"password_1":
+        password_1, "password_2": password_2} only if password_1 is correct
+        """
+        request_data = request.json
+        password_1 = request_data.get('password_1', None)
+        password_2 = request_data.get('password_2', None)
+        # check if data is existing, otherwise abort
+        if check_request_integrity([password_1, password_2]):
+            abort(400)
+
+        email = get_email_from_token()
+        filters = {'email': email,
+                   'password': password_1
+                   }
+        # get user by email from db
+        user = user_service.get_one_by_key(filters)
+
+        # hash user password from request
+        password_hash = user_service.get_hash(password_1)
+
+        # check password correctness, otherwise return error
+        if compare_passwords(password_hash, user.password):
+            return {"error": "Wrong user data"}, 401
+
+        request_data["email"] = get_email_from_token()
+
+        user_service.update_password(request_data)
+        return '', 204
+
 
 
 @user_ns.route('/<int:uid>')
@@ -62,12 +104,11 @@ class UserView(Resource):
         user_service.update(req_json)
         return "", 204
 
-    @admin_required
     def delete(self, uid):
         """
-        delete movie with required id, using method delete() of MovieService class object
+        delete user with required id, using method delete() of MovieService class object
 
-        :param uid: id of required movie to be deleted
+        :param uid: id of required user to be deleted
         :return: response code
         """
         user_service.delete(uid)

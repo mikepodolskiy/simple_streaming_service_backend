@@ -43,6 +43,11 @@ Accept: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhc3lhQHNreXByby5jb20iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzc5MTU2NDN9.-TYavzDCAucIvNY8Y0wUU4J7Qey56fQQfYrtN3bNGek
 
 ###
+GET http://127.0.0.1:10001/users/
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhc3lhQHNreXByby5jb20iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2NzgwMDU2OTN9.FaJf_Y9ZWrrR5qcc9xXV0xoeDkApkDE1kFc_NQwQ_B0
+
+###
 
 GET http://127.0.0.1:10001/genres/?page=1
 Accept: application/json
@@ -109,7 +114,7 @@ Content-Type: application/json
 
 ###
 
-DELETE http://127.0.0.1:10001/users/4
+DELETE http://127.0.0.1:10001/users/
 
 ###
 

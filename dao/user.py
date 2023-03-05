@@ -48,17 +48,15 @@ class UserDAO:
 
     def update(self, user_d):
         """
-        requesting to session to add user and commit
+        requesting to session to add movie and commit
         :param user_d: element to be updated
         :return: updated element (not necessary)
         """
-        user = self.get_one(user_d.get("id"))
-        user.email = user_d.get("email")
-        user.password = user_d.get("password")
-        user.role = user_d.get("role")
 
-        self.session.add(user)
+        self.session.add(user_d)
         self.session.commit()
+
+        return user_d
 
     def delete(self, rid):
         """
