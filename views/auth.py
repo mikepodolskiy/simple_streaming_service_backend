@@ -11,13 +11,34 @@ from service.auth import check_request_integrity, check_user_exist, compare_pass
 auth_ns = Namespace('auth')
 
 
-# creating class based views using namespaces for all required endpoints
-@auth_ns.route('/')
+# creating class based views using namespaces for register endpoints
+@auth_ns.route('/register/')
+class AuthRegView(Resource):
+    def post(self):
+        req_json = request.json
+        email = req_json.get('email', None)
+        password = req_json.get('password', None)
+        name = req_json.get('name', None)
+        surname = req_json.get('surname', None)
+        role = req_json.get("role", "user")
+        favorite_genre = req_json.get('favorite_genre', None)
+        user_data = {"email": email,
+                     "password": password,
+                     "name": name,
+                     "surname": surname,
+                     "role": role,
+                     "favorite_genre": favorite_genre
+                     }
+        user_service.create(user_data)
+
+        return "", 201
+
+# creating class based views using namespaces for login endpoints
+@auth_ns.route('/login/')
 class AuthView(Resource):
     def post(self):
         req_json = request.json
         email = req_json.get('email', None)
-        print(email)
         password = req_json.get('password', None)
         filters = {'email': email,
                    'password': password
@@ -28,20 +49,16 @@ class AuthView(Resource):
 
         # get user by email from db, check if user exists, otherwise return error
         user = user_service.get_one_by_key(filters)
-        print(user)
+
         if check_user_exist(user):
             return {"error": "User not exist"}, 401
 
         # hash user password from request
         password_hash = user_service.get_hash(password)
-        print(password_hash)
-        print(type(password_hash))
-        print(user.password)
-        print(type(user.password))
 
         # check password correctness, otherwise return error
         if compare_passwords(password_hash, user.password):
-            return {"error": "Неверные учётные данные"}, 401
+            return {"error": "Wrong user data"}, 401
 
         # generating tokens
         data = {
