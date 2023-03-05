@@ -22,21 +22,31 @@ class FavoriteDAO:
         return ent
 
 
-    def get_one(self, mid):
+    def get_one(self, fid):
         """
         using session, requesting to db to required class, getting data by id
-        :param mid: required id
+        :param fid: required id
         :return: data of element with required id
         """
-        return self.session.query(Favorite).get(mid)
+        return self.session.query(Favorite).get(fid)
 
-    def delete(self, mid):
+
+    def get_by_filters(self, filters):
+        request = self.session.query(Favorite)
+        if "movie_id" in filters:
+            request = request.filter(Favorite.movie_id == filters.get("movie_id"))
+        if "user_id" in filters:
+            request = request.filter(Favorite.user_id == filters.get("user_id"))
+        return request.all()
+
+
+    def delete(self, fid):
         """
         getting favorite to delete using get_one with id
-        :param mid: id of required favorite
+        :param fid: id of required favorite
         :return: nothing
         """
-        favorite = self.get_one(mid)
+        favorite = self.get_one(fid)
         self.session.delete(favorite)
         self.session.commit()
 

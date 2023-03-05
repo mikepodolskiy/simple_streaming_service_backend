@@ -1,6 +1,6 @@
 # import required libraries and modules
 from flask import Flask
-from flask_restx import Api
+from flask_restx import Api, Swagger
 
 from config import Config
 from setup_db import db
@@ -41,3 +41,5 @@ app.debug = True
 # run app with import check
 if __name__ == '__main__':
     app.run(host="localhost", port=10001, debug=True)
+    Swagger(app)
+

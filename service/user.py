@@ -96,6 +96,8 @@ class UserService:
 
         self.dao.update(user_d_to_update)
 
+        return "", 204
+
 
 
     def delete(self, uid):

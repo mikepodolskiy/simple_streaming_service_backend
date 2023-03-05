@@ -52,6 +52,7 @@ class MovieView(Resource):
         """
         getting one movie using method get_one of MovieService class object
         using serialization with Schema class object
+        :param bid: id of element to get
         :return: movie with required id - dict
         """
         b = movie_service.get_one(bid)

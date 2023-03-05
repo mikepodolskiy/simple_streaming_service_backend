@@ -65,7 +65,7 @@ class GenreService:
 
     def delete(self, rid):
         """
-        applying  to dao object update() method
+        applying  to dao object delete() method
         :param rid: id of genre to delete
         """
         self.dao.delete(rid)
