@@ -1,5 +1,5 @@
 # import required modules
-from dao.favorite import FavoriteDAO
+from app.dao.favorite import FavoriteDAO
 
 
 # creating class to contain logics from DAO class

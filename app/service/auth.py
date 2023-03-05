@@ -6,7 +6,7 @@ import calendar
 import jwt
 from flask import request
 from flask_restx import abort
-from constants import PWD_HASH_SALT, PWD_HASH_ITERATIONS, auth_secret as secret, algo
+from app.constants import PWD_HASH_SALT, PWD_HASH_ITERATIONS, auth_secret as secret, algo
 
 
 def check_request_integrity(param_list):

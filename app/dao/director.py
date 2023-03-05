@@ -1,5 +1,5 @@
 # import required modules
-from dao.model.director import Director
+from app.dao.model.director import Director
 
 
 # creating class for interaction with db

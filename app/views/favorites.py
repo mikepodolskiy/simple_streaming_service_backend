@@ -1,10 +1,8 @@
 # import required libraries and modules
 
-from flask import request
 from flask_restx import Resource, Namespace
-from dao.model.favorite import FavoriteSchema
-from implemented import favorite_service, user_service
-from service.auth import auth_required, get_email_from_token, get_name_from_token
+from app.implemented import favorite_service, user_service
+from app.service.auth import auth_required, get_email_from_token
 
 # creating namespace
 favorite_ns = Namespace('favorites')

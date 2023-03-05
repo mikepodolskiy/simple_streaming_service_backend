@@ -1,6 +1,6 @@
 # import required modules
-from dao.movie import MovieDAO
-from constants import movie_page_limit as page_limit
+from app.dao.movie import MovieDAO
+from app.constants import movie_page_limit as page_limit
 
 
 # creating class to contain logics from DAO class

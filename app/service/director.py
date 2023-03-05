@@ -1,11 +1,11 @@
 # import required modules
-from dao.genre import GenreDAO
-from constants import genre_page_limit as page_limit
+from app.dao.director import DirectorDAO
+from app.constants import director_page_limit as page_limit
 
 
-# creating class to contain all logics from DAO class
-class GenreService:
-    def __init__(self, dao: GenreDAO):
+
+class DirectorService:
+    def __init__(self, dao: DirectorDAO):
         """
         creating constructor, getting dao object inside itself
         :param dao: dao object
@@ -41,31 +41,31 @@ class GenreService:
         """
         page = filters.get("page")
         if page is not None:
-            page = int(page)
-            genres = self.dao.get_all()
-            genres_to_show = self.show_by_page(page, page_limit, genres)
+            page=int(page)
+            directors = self.dao.get_all()
+            directors_to_show = self.show_by_page(page, page_limit, directors)
         else:
-            genres_to_show = self.dao.get_all()
-        return genres_to_show
+            directors_to_show = self.dao.get_all()
+        return directors_to_show
 
-    def create(self, genre_d):
+    def create(self, director_d):
         """
         applying  to dao object create() method
-        :param genre_d: genre data
+        :param director_d: genre data
         """
-        return self.dao.create(genre_d)
+        return self.dao.create(director_d)
 
-    def update(self, genre_d):
+    def update(self, director_d):
         """
         applying  to dao object update() method
-        :param genre_d: genre data
+        :param director_d: director data
         """
-        self.dao.update(genre_d)
+        self.dao.update(director_d)
         return self.dao
 
     def delete(self, rid):
         """
-        applying  to dao object delete() method
-        :param rid: id of genre to delete
+        applying  to dao object update() method
+        :param rid: id of director to delete
         """
         self.dao.delete(rid)

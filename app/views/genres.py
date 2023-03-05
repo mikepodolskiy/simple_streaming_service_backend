@@ -1,33 +1,32 @@
 # import required libraries and modules
-from flask import request
 from flask_restx import Resource, Namespace
-from dao.model.director import DirectorSchema
-from implemented import director_service
-from service.auth import auth_required, admin_required
+from flask import request
+from app.dao.model.genre import GenreSchema
+from app.implemented import genre_service
+from app.service.auth import auth_required, admin_required
 
 # creating namespace
-director_ns = Namespace('directors')
+genre_ns = Namespace('genres')
 
 
 # creating class based views using namespaces for all required endpoints
-@director_ns.route('/')
-class DirectorsView(Resource):
+@genre_ns.route('/')
+class GenresView(Resource):
     @auth_required
     def get(self):
         """
-        getting all directors list using method get_all of DirectorService class object
+        getting all genres list using method get_all of GenreService class object
         using serialization with Schema class object
-        :return: directors list
+        :return: genres list
         """
-
         page = request.args.get("page")
 
         filters = {
             "page": page,
         }
 
-        rs = director_service.get_all(filters)
-        res = DirectorSchema(many=True).dump(rs)
+        rs = genre_service.get_all(filters)
+        res = GenreSchema(many=True).dump(rs)
         return res, 200
 
     @admin_required
@@ -38,45 +37,45 @@ class DirectorsView(Resource):
         :return: info message,response code
         """
         req_json = request.json
-        director = director_service.create(req_json)
-        return "", 201, {"location": f"/movies/{director.id}"}
+        genre = genre_service.create(req_json)
+        return "", 201, {"location": f"/movies/{genre.id}"}
 
 
-@director_ns.route('/<int:rid>')
-class DirectorView(Resource):
+@genre_ns.route('/<int:rid>')
+class GenreView(Resource):
     @auth_required
     def get(self, rid):
         """
-        getting one director dict using method get_one of DirectorService class object
+        getting one genre dict using method get_one of GenreService class object
         using serialization with Schema class object
-        :return: director with required id - dict
+        :return: genre with required id - dict
         """
-        r = director_service.get_one(rid)
-        sm_d = DirectorSchema().dump(r)
+        r = genre_service.get_one(rid)
+        sm_d = GenreSchema().dump(r)
         return sm_d, 200
 
     @admin_required
-    def put(self, did):
+    def put(self, gid):
         """
         getting data from request, transforming data using .json
         adding id to transformed data (as it should not contain id)
         updating required element using method update() of MovieService class object
-        :param did: element to update id
+        :param gid: element to update id
         :return: response code
         """
         req_json = request.json
         if "id" not in req_json:
-            req_json["id"] = did
-        director_service.update(req_json)
+            req_json["id"] = gid
+        genre_service.update(req_json)
         return "", 204
 
     @admin_required
-    def delete(self, did):
+    def delete(self, gid):
         """
         delete movie with required id, using method delete() of MovieService class object
 
-        :param did: id of required movie to be deleted
+        :param gid: id of required movie to be deleted
         :return: response code
         """
-        director_service.delete(did)
+        genre_service.delete(gid)
         return "", 204

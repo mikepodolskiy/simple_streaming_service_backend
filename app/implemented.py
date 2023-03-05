@@ -1,15 +1,15 @@
 # import required classes
-from dao.director import DirectorDAO
-from dao.genre import GenreDAO
-from dao.movie import MovieDAO
-from dao.user import UserDAO
-from dao.favorite import FavoriteDAO
-from service.director import DirectorService
-from service.genre import GenreService
-from service.movie import MovieService
-from service.user import UserService
-from service.favorite import FavoriteService
-from setup_db import db
+from app.dao.director import DirectorDAO
+from app.dao.genre import GenreDAO
+from app.dao.movie import MovieDAO
+from app.dao.user import UserDAO
+from app.dao.favorite import FavoriteDAO
+from app.service.director import DirectorService
+from app.service.genre import GenreService
+from app.service.movie import MovieService
+from app.service.user import UserService
+from app.service.favorite import FavoriteService
+from app.setup_db import db
 
 # creating Dao objects, with session
 director_dao = DirectorDAO(session=db.session)

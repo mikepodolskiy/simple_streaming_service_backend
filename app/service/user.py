@@ -1,12 +1,8 @@
 # import required modules
 import base64
 import hashlib
-import jwt
-from flask_restx import abort
-from flask import request
-from constants import PWD_HASH_SALT, PWD_HASH_ITERATIONS, auth_secret, algo
-from dao.user import UserDAO
-from service.auth import compare_passwords
+from app.constants import PWD_HASH_SALT, PWD_HASH_ITERATIONS
+from app.dao.user import UserDAO
 
 
 # creating class to contain logics from DAO class

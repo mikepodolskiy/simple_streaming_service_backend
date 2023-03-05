@@ -1,7 +1,6 @@
 # import required modules
-from sqlalchemy import desc
 
-from dao.model.favorite import Favorite
+from app.dao.model.favorite import Favorite
 
 class FavoriteDAO:
     # creating constructor, getting object - session and save it in itself. session could be with different db type (

@@ -1,7 +1,7 @@
 # import required modules
 from sqlalchemy import desc
 
-from dao.model.movie import Movie
+from app.dao.model.movie import Movie
 
 
 # creating class for interaction with db

@@ -1,32 +1,36 @@
 # import required libraries and modules
-from flask_restx import Resource, Namespace
 from flask import request
-from dao.model.genre import GenreSchema
-from implemented import genre_service
-from service.auth import auth_required, admin_required
+from flask_restx import Resource, Namespace
 
-# creating namespace
-genre_ns = Namespace('genres')
+from app.dao.model.movie import MovieSchema
+from app.implemented import movie_service
+from app.service.auth import auth_required, admin_required
+
+# creating namespaces for movies
+movie_ns = Namespace('movies')
 
 
 # creating class based views using namespaces for all required endpoints
-@genre_ns.route('/')
-class GenresView(Resource):
+@movie_ns.route('/')
+class MoviesView(Resource):
     @auth_required
     def get(self):
         """
-        getting all genres list using method get_all of GenreService class object
+        getting all movies list or movies with filter using method get_all of MovieService class object
         using serialization with Schema class object
-        :return: genres list
+        :return: movies list
         """
+
+        status = request.args.get("status")
         page = request.args.get("page")
 
         filters = {
+            "status": status,
             "page": page,
         }
 
-        rs = genre_service.get_all(filters)
-        res = GenreSchema(many=True).dump(rs)
+        all_movies = movie_service.get_all(filters)
+        res = MovieSchema(many=True).dump(all_movies)
         return res, 200
 
     @admin_required
@@ -37,45 +41,46 @@ class GenresView(Resource):
         :return: info message,response code
         """
         req_json = request.json
-        genre = genre_service.create(req_json)
-        return "", 201, {"location": f"/movies/{genre.id}"}
+        movie = movie_service.create(req_json)
+        return "", 201, {"location": f"/movies/{movie.id}"}
 
 
-@genre_ns.route('/<int:rid>')
-class GenreView(Resource):
+@movie_ns.route('/<int:bid>')
+class MovieView(Resource):
     @auth_required
-    def get(self, rid):
+    def get(self, bid):
         """
-        getting one genre dict using method get_one of GenreService class object
+        getting one movie using method get_one of MovieService class object
         using serialization with Schema class object
-        :return: genre with required id - dict
+        :param bid: id of element to get
+        :return: movie with required id - dict
         """
-        r = genre_service.get_one(rid)
-        sm_d = GenreSchema().dump(r)
+        b = movie_service.get_one(bid)
+        sm_d = MovieSchema().dump(b)
         return sm_d, 200
 
     @admin_required
-    def put(self, gid):
+    def put(self, bid):
         """
         getting data from request, transforming data using .json
         adding id to transformed data (as it should not contain id)
         updating required element using method update() of MovieService class object
-        :param gid: element to update id
+        :param bid: element to update id
         :return: response code
         """
         req_json = request.json
         if "id" not in req_json:
-            req_json["id"] = gid
-        genre_service.update(req_json)
+            req_json["id"] = bid
+        movie_service.update(req_json)
         return "", 204
 
     @admin_required
-    def delete(self, gid):
+    def delete(self, bid):
         """
         delete movie with required id, using method delete() of MovieService class object
 
-        :param gid: id of required movie to be deleted
+        :param bid: id of required movie to be deleted
         :return: response code
         """
-        genre_service.delete(gid)
+        movie_service.delete(bid)
         return "", 204

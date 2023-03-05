@@ -1,5 +1,5 @@
 # import required modules
-from dao.model.genre import Genre
+from app.dao.model.genre import Genre
 
 
 # creating class for interaction with db

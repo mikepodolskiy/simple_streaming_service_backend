@@ -1,5 +1,5 @@
 # import required modules
-from dao.model.user import User
+from app.dao.model.user import User
 
 
 # creating class for interaction with db

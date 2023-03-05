@@ -1,6 +1,6 @@
 # import required libraries and modules
 from marshmallow import Schema, fields
-from setup_db import db
+from app.setup_db import db
 
 
 # creating class as inheritance of Model class, cols acc to UML

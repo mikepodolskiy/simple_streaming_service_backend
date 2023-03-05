@@ -2,15 +2,14 @@
 from flask import Flask
 from flask_restx import Api, Swagger
 
-from config import Config
-from setup_db import db
-from views.directors import director_ns
-from views.genres import genre_ns
-from views.movies import movie_ns
-from views.users import user_ns
-from views.auth import auth_ns
-from views.favorites import favorite_ns
-from dao.model.favorite import Favorite
+from app.config import Config
+from app.setup_db import db
+from app.views.directors import director_ns
+from app.views.genres import genre_ns
+from app.views.movies import movie_ns
+from app.views.users import user_ns
+from app.views.auth import auth_ns
+from app.views.favorites import favorite_ns
 
 
 # creating and configuring app in function
@@ -33,7 +32,6 @@ def register_extensions(app):
     api.add_namespace(favorite_ns)
 
 
-
 # creating app using function
 app = create_app(Config())
 app.debug = True
@@ -42,4 +40,3 @@ app.debug = True
 if __name__ == '__main__':
     app.run(host="localhost", port=10001, debug=True)
     Swagger(app)
-

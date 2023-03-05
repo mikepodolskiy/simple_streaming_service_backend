@@ -2,9 +2,9 @@
 import jwt
 from flask import request
 from flask_restx import Resource, Namespace, abort
-from implemented import user_service
-from constants import auth_secret as secret, algo
-from service.auth import check_request_integrity, check_user_exist, compare_passwords, generate_access_token, \
+from app.implemented import user_service
+from app.constants import auth_secret as secret, algo
+from app.service.auth import check_request_integrity, check_user_exist, compare_passwords, generate_access_token, \
     generate_refresh_token
 
 # creating namespace

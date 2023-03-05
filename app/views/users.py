@@ -2,9 +2,9 @@
 
 from flask import request
 from flask_restx import Resource, Namespace, abort
-from dao.model.user import UserSchema
-from implemented import user_service
-from service.auth import auth_required, admin_required, get_email_from_token, check_request_integrity, compare_passwords
+from app.dao.model.user import UserSchema
+from app.implemented import user_service
+from app.service.auth import auth_required, admin_required, get_email_from_token, check_request_integrity, compare_passwords
 
 # creating namespace
 user_ns = Namespace('users')
