@@ -1,5 +1,6 @@
 # import required libraries and modules
 from flask import Flask
+from flask_migrate import Migrate
 from flask_restx import Api, Swagger
 
 from app.config import Config
@@ -35,8 +36,8 @@ def register_extensions(app):
 # creating app using function
 app = create_app(Config())
 app.debug = True
-
+migrate = Migrate(app, db, render_as_batch=True)
 # run app with import check
 if __name__ == '__main__':
-    app.run(host="localhost", port=10001, debug=True)
+    app.run(host="localhost", port=25000, debug=True)
     Swagger(app)

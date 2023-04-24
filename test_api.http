@@ -1,6 +1,6 @@
 GET http://127.0.0.1:10001/movies/
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhc3lhQHNreXByby5jb20iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzc5MTU2NDN9.-TYavzDCAucIvNY8Y0wUU4J7Qey56fQQfYrtN3bNGek
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTY5MzU3Nzc3N30.mckCoVocHgyreT8hxP2T0MsGn7VL5lojWUyWtGzERz8
 ###
 
 GET http://127.0.0.1:10001/movies/?status=new
