@@ -39,9 +39,9 @@ jobs:
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          username: ${{ secrets.HOST_USERNAME }}
+          password: ${{ secrets.HOST_USER_PASSWORD }}
           port: 25000
           script: |
             cd deploy
-            echo ${{ secrets.PASSWORD }} | sudo -S docker-compose up -d
+            echo ${{ secrets.HOST_USER_PASSWORD }} | sudo -S docker-compose up -d
