@@ -3,36 +3,30 @@ version: "3.9"
 services:
   api:
 
-    image: mikepodolskiy/skypro_lesson26:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+    build: .
     ports:
-      - 80:80
-    volumes:
-      - ./docker_config.py:/code/default_config.py
-    depends_on:
-      pg:
-        condition: service_healthy
-      migrations:
-        condition: service_completed_successfully
-  migrations:
-    image: mikepodolskiy/skypro_lesson26:$GITHUB_REF_NAME-$GITHUB_RUN_ID
-
-    volumes:
-      - ./docker_config.py:/code/default_config.py
-    depends_on:
-      pg:
-        condition: service_healthy
-    command: flask db upgrade
-  pg:
-    image: postgres:latest
+      - 25000:25000
     environment:
-      POSTGRES_USER: $DB_USER
-      POSTGRES_PASSWORD: $DB_PASSWORD
-      POSTGRES_DB: $DB_NAME
-    volumes:
-      - ./pg_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+      - DB_PASSWORD=$DB_PASSWORD
+      - DB_USER=$DB_USER
+      - DB_NAME=$DB_NAME
+      - DB_HOST=postgres_db
 
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+
+  postgres_db:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=$DB_PASSWORD
+      - POSTGRES_USER=$DB_USER
+      - POSTGRES_NAME=$DB_NAME
+
+    healthcheck:
+      test: /usr/bin/pg_isready
+      interval: 5s
+      timeout: 10s
+      retries: 120

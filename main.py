@@ -1,10 +1,9 @@
 # import required libraries and modules
 from flask import Flask
-from flask_migrate import Migrate
 from flask_restx import Api, Swagger
 
 from app.config import Config
-from app.setup_db import db
+from app.setup_db import db, migrate
 from app.views.directors import director_ns
 from app.views.genres import genre_ns
 from app.views.movies import movie_ns
@@ -18,6 +17,7 @@ def create_app(config_object):
     app = Flask(__name__)
     app.config.from_object(config_object)
     register_extensions(app)
+    migrate.init_app(app, db)
     return app
 
 
@@ -34,10 +34,10 @@ def register_extensions(app):
 
 
 # creating app using function
-app = create_app(Config())
+app: Flask = create_app(Config())
 app.debug = True
-migrate = Migrate(app, db, render_as_batch=True)
+
 # run app with import check
 if __name__ == '__main__':
-    app.run(host="localhost", port=25000, debug=True)
+    app.run(host="0.0.0.0", port=25000, debug=True)
     Swagger(app)
