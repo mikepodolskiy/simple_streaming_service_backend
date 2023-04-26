@@ -19,7 +19,7 @@ jobs:
       - name: clone code
         uses: actions/checkout@v2
       - name: render config
-        run:
+        run: |
           mkdir deploy
           export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
           export DB_USER=${{ secrets.DB_USER }}
