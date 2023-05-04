@@ -5,3 +5,4 @@ app/views/__pycache__
 .DS_Store
 __pycache__
 aux_file.py
+venv
