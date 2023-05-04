@@ -25,7 +25,7 @@ jobs:
           export DB_USER=${{ secrets.DB_USER }}
           export DB_NAME=${{ secrets.DB_NAME }}
           export GIT_PATH=${{ secrets.GIT_PATH }}
-          at docker-compose-ci.yaml | envsubst > deploy/docker-compose.yaml
+          cat docker-compose-ci.yaml | envsubst > deploy/docker-compose.yaml
       - name: copy files to server
         uses: appleboy/scp-action@v0.1.4
         with:
