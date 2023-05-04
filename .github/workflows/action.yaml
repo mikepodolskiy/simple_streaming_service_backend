@@ -41,7 +41,6 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.HOST_USERNAME }}
           password: ${{ secrets.HOST_USER_PASSWORD }}
-          port: 25000
           script: |
             cd deploy
             echo ${{ secrets.HOST_USER_PASSWORD }} | sudo -S docker-compose up -d
