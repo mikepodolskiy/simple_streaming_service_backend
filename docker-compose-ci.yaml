@@ -3,7 +3,7 @@ version: "3.9"
 services:
   api:
 
-    build: .
+    image: $GIT_PATH:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     ports:
       - 25000:25000
     environment:
@@ -26,7 +26,7 @@ services:
       - POSTGRES_NAME=$DB_NAME
 
     healthcheck:
-      test: /usr/bin/pg_isready
-      interval: 5s
-      timeout: 10s
-      retries: 120
+      test: pg_isready -U $DB_USER
+      timeout: 3s
+      retries: 10
+      interval: 3s
